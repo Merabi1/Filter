@@ -9,10 +9,4 @@
     <ProjectReference Include="..\FilterOfFIlter\FilterOfFIlter.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Reference Include="SevenSpikes.Nop.Plugins.AjaxFilters">
-      <HintPath>..\References\SevenSpikes.Nop.Plugins.AjaxFilters.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-
 </Project>

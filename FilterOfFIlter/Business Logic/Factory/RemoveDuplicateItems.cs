@@ -1,4 +1,4 @@
-﻿using SevenSpikes.Nop.Plugins.AjaxFilters.Models.AttributeFilter;
+﻿using FilterOfFIlter.Business_Logic.Extension;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,35 +8,37 @@ namespace FilterOfFIlter
 {
     public class RemoveDuplicateItems
     {
-        public List<AttributeFilterItem> RemoveDuplicateItemsOfList(IList<AttributeFilterItem> Items)
+        public List<T> RemoveDuplicateItemsOfList<T>(IList<T> objects,string propertyName)
         {
-            var SavedItems = new List<AttributeFilterItem>();
+            var SavedItems = new List<T>();
 
-            foreach (var item in Items)
+            foreach (var item in objects)
             {
-                var attrs = Items.FindByName(item.Name);
+                var getValueFromProp = item.GetValueFromProperty(propertyName).ToString();
 
-                AttributeFilterItem attr = null;
+                var items = objects.FindByName(getValueFromProp, propertyName);
 
-                if (SavedItems.ExistsName(item.Name))
+                T @object = default;
+
+                if (SavedItems.ExistsName(getValueFromProp, propertyName))
                     continue;
 
-                ChangeProductsAttrLocation(attrs, ref attr);
+                //ChangeProductsAttrLocation(items, ref @object);
 
-                SavedItems.Add(attr);
+                SavedItems.Add(@object);
             }
 
             return SavedItems;
         }
 
-        private void ChangeProductsAttrLocation(List<AttributeFilterItem> attrs, ref AttributeFilterItem attr)
+     /*   private void ChangeProductsAttrLocation<T>(List<T> objects, ref T attr)
         {
-            for (int i = 0; i < attrs.Count; i++)
+            for (int i = 0; i < objects.Count; i++)
                 if (i == 0)
-                    attr = attrs[i];
+                    attr = objects[i];
                 else
-                    foreach (var productNumber in attrs[i].ProductVariantAttributeIds)
+                    foreach (var productNumber in objects[i].ProductVariantAttributeIds)
                         attr.ProductVariantAttributeIds.Add(productNumber);
-        }
+        }*/
     }
 }

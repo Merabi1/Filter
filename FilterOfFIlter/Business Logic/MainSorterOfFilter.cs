@@ -1,5 +1,4 @@
-﻿using SevenSpikes.Nop.Plugins.AjaxFilters.Models.AttributeFilter;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,32 +15,32 @@ namespace FilterOfFIlter
                                  new SortingBeforeString(new ComparerBeforeString()));
         }
 
-        public IList<AttributeFilterItem> SortingAscending(IList<AttributeFilterItem> attrFilterItems)
+        public IList<T> SortingAscending<T>(IList<T> objects,string propertyName)
         {
-            if (attrFilterItems.IsNull())
-                return new List<AttributeFilterItem>();
+            if (objects.IsNull())
+                return new List<T>();
 
-            List<string> Names =  attrFilterItems.GetNamesList();
+            List<string> names =  objects.GetNamesList(propertyName);
 
-            _sorter.SortingAfterAndBefore(ref Names);
+            _sorter.SortingAfterAndBefore(ref names);
 
-            return new SortingAscending().FilterSorterToAscending(attrFilterItems, Names);
+            return new SortingAscending().FilterSorterToAscending(objects, names, propertyName);
         }
 
-        public  IList<AttributeFilterItem> RemoveDuplicateItems(IList<AttributeFilterItem> attrFilterItems)
+        public  IList<T> RemoveDuplicateItems<T>(IList<T> objects,string propertyName)
         {
-            if (attrFilterItems.IsNull())
-                return new List<AttributeFilterItem>();
+            if (objects.IsNull())
+                return new List<T>();
 
-            return new RemoveDuplicateItems().RemoveDuplicateItemsOfList(attrFilterItems);
+            return new RemoveDuplicateItems().RemoveDuplicateItemsOfList(objects,propertyName);
         }
 
-        public  IList<AttributeFilterItem> CorrectFormatOfItems(IList<AttributeFilterItem> attrFilterItems)
+        public  IList<T> CorrectFormatOfItems<T>(IList<T> attrFilterItems, string propertyName)
         {
             if (attrFilterItems.IsNull())
-                return new List<AttributeFilterItem>();
+                return new List<T>();
 
-            return new CorrectFormatOfItems().CorrectFormatOfItemsOfList(attrFilterItems);
+            return new CorrectFormatOfItems().CorrectFormatOfItemsOfList(attrFilterItems,propertyName);
         }
 
     }

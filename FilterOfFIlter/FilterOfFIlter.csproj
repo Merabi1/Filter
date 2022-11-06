@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="SevenSpikes.Nop.Plugins.AjaxFilters">
+      <HintPath>..\References\SevenSpikes.Nop.Plugins.AjaxFilters.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
